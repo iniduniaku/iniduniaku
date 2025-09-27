@@ -1984,3 +1984,351 @@ textarea:focus-visible {
     0%, 100% { opacity: 0.6; }
     50% { opacity: 1; }
   }
+/* Reply Preview Styles */
+.reply-preview {
+    background: linear-gradient(135deg, #fff, #f8f9fa);
+    border-top: 1px solid rgba(233, 30, 99, 0.2);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 4px solid var(--primary-color);
+    margin: 0 10px;
+    border-radius: 8px 8px 0 0;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reply-content {
+    flex: 1;
+    overflow: hidden;
+}
+
+.reply-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.reply-header i {
+    font-size: 14px;
+}
+
+.reply-text {
+    font-size: 14px;
+    color: var(--text-light);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+}
+
+.cancel-reply-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: var(--transition);
+    min-width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel-reply-btn:hover {
+    background-color: rgba(233, 30, 99, 0.1);
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Replied message in chat */
+.replied-message {
+    background: rgba(233, 30, 99, 0.1);
+    border-left: 4px solid var(--primary-color);
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.replied-message:hover {
+    background: rgba(233, 30, 99, 0.15);
+    transform: translateY(-1px);
+}
+
+.replied-username {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.replied-text {
+    color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: 0.8;
+}
+
+/* Message header with actions */
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 0 10px;
+    position: relative;
+}
+
+.message-actions {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    gap: 5px;
+}
+
+.message:hover .message-actions {
+    opacity: 1;
+}
+
+.reply-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: var(--text-light);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reply-btn:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(233, 30, 99, 0.3);
+}
+
+/* Message own styles untuk reply */
+.message.own .reply-btn {
+    background: rgba(194, 24, 91, 0.1);
+}
+
+.message.own .reply-btn:hover {
+    background: rgba(194, 24, 91, 0.2);
+    color: var(--primary-dark);
+}
+
+/* Animation untuk replied message */
+.replied-message.highlight {
+    animation: highlightReply 2s ease-out;
+}
+
+@keyframes highlightReply {
+    0% {
+        background: rgba(233, 30, 99, 0.3);
+        transform: scale(1.02);
+    }
+    100% {
+        background: rgba(233, 30, 99, 0.1);
+        transform: scale(1);
+    }
+}
+
+/* Mobile responsiveness untuk reply */
+@media (max-width: 768px) {
+    .reply-preview {
+        margin: 0 5px;
+        padding: 8px 10px;
+    }
+    
+    .reply-text {
+        max-width: 200px;
+        font-size: 13px;
+    }
+    
+    .reply-header {
+        font-size: 11px;
+    }
+    
+    .message-actions {
+        opacity: 1; /* Selalu tampil di mobile */
+    }
+    
+    .reply-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    .replied-message {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    
+    .replied-username {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reply-preview {
+        padding: 6px 8px;
+        margin: 0 3px;
+    }
+    
+    .reply-text {
+        max-width: 150px;
+        font-size: 12px;
+    }
+    
+    .reply-header {
+        font-size: 10px;
+    }
+    
+    .cancel-reply-btn {
+        min-width: 25px;
+        height: 25px;
+        font-size: 14px;
+    }
+    
+    .reply-btn {
+        width: 25px;
+        height: 25px;
+        font-size: 11px;
+        padding: 4px;
+    }
+    
+    .replied-message {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+    
+    .replied-username {
+        font-size: 10px;
+    }
+}
+
+/* Style untuk pesan yang sedang direply */
+.message.being-replied {
+    animation: replyGlow 1s ease-out;
+}
+
+@keyframes replyGlow {
+    0% {
+        background: rgba(233, 30, 99, 0.1);
+        transform: scale(1.01);
+    }
+    100% {
+        background: transparent;
+        transform: scale(1);
+    }
+}
+
+/* Styling khusus untuk media dalam replied message */
+.replied-text.has-media {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.replied-text.has-media i {
+    font-size: 12px;
+    color: var(--primary-color);
+}
+
+/* Adjust input area when reply is active */
+.chat-input:has(.reply-preview:not(.hidden)) {
+    border-top: none;
+}
+
+.chat-input:has(.reply-preview:not(.hidden)) .input-container {
+    border-radius: 0 0 30px 30px;
+}
+
+/* Reply preview dalam mode landscape */
+@media (orientation: landscape) and (max-height: 600px) {
+    .reply-preview {
+        padding: 6px 12px;
+    }
+    
+    .reply-header {
+        font-size: 11px;
+    }
+    
+    .reply-text {
+        font-size: 12px;
+        max-width: 250px;
+    }
+}
+
+/* Dark mode support untuk reply */
+@media (prefers-color-scheme: dark) {
+    .reply-preview {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    }
+    
+    .replied-message {
+        background: rgba(233, 30, 99, 0.15);
+    }
+    
+    .replied-message:hover {
+        background: rgba(233, 30, 99, 0.2);
+    }
+    
+    .reply-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+    }
+    
+    .reply-btn:hover {
+        background: rgba(233, 30, 99, 0.2);
+    }
+}
+
+/* Accessibility improvements */
+.reply-btn:focus-visible,
+.cancel-reply-btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Print styles untuk reply */
+@media print {
+    .message-actions,
+    .reply-preview {
+        display: none !important;
+    }
+    
+    .replied-message {
+        background: #f5f5f5 !important;
+        border-left: 2px solid #333 !important;
+    }
+        }
