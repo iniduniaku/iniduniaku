@@ -137,11 +137,6 @@ function getFileTypeEmoji(mediaType, filename) {
   }
 }
 
-// Fungsi untuk mencari pesan berdasarkan ID (untuk fitur reply)
-function findMessageById(messageId) {
-  return messages.find(msg => msg.id === messageId);
-}
-
 // Last seen management
 function loadLastSeen() {
   try {
@@ -399,18 +394,19 @@ function isUserAuthorized(username) {
   return authorizedUsers.some(user => user.username === username);
 }
 
-// Message management
+// Message management dengan reply
 function loadMessages() {
   try {
     if (fs.existsSync(MESSAGES_FILE)) {
       const data = fs.readFileSync(MESSAGES_FILE, 'utf8');
       messages = JSON.parse(data);
       
-      // Migrasi pesan lama yang tidak memiliki readBy property atau replyTo property
+      // Migrasi pesan lama yang tidak memiliki readBy property
       messages = messages.map(msg => {
         if (!msg.readBy) {
           msg.readBy = [];
         }
+        // Migrasi pesan lama yang tidak memiliki replyTo property
         if (!msg.replyTo) {
           msg.replyTo = null;
         }
@@ -648,16 +644,6 @@ io.on('connection', (socket) => {
   socket.on('new_message', (data) => {
     if (!socket.username) return;
 
-    // Validasi reply message jika ada
-    let replyToMessage = null;
-    if (data.replyTo) {
-      replyToMessage = findMessageById(data.replyTo);
-      if (!replyToMessage) {
-        socket.emit('error', { message: 'Pesan yang direply tidak ditemukan' });
-        return;
-      }
-    }
-
     const message = {
       id: Date.now() + Math.random(),
       username: socket.username,
@@ -666,7 +652,7 @@ io.on('connection', (socket) => {
       timestamp: new Date(),
       type: data.type || 'text',
       readBy: [], // Inisialisasi kosong
-      replyTo: data.replyTo || null // Tambah property untuk reply
+      replyTo: data.replyTo || null // Tambahkan reply data
     };
 
     messages.push(message);
@@ -704,10 +690,8 @@ io.on('connection', (socket) => {
     // HANYA kirim notifikasi Telegram untuk pesan baru
     sendNewMessageNotification(message);
     
-    const logText = message.text ? message.text.substring(0, 50) + (message.text.length > 50 ? '...' : '') : 'Media file';
-    const replyInfo = message.replyTo ? ` (replying to message ${message.replyTo})` : '';
-    console.log(`${getFormattedTimestamp()} 💬 New message from ${socket.username}: ${logText}${replyInfo}`);
-  });
+    const replyText = message.replyTo ? ' (reply)' : '';
+    console.log(`${getFormattedTimestamp()} ADA FILM BARU NIH );
 
   socket.on('typing', (isTyping) => {
     if (!socket.username) return;
