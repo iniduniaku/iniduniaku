@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☺</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen">
+        <div class="login-container">
+            <h1><i class="fas fa-heart"></i>Mau Masuk Ke Hatiku Sayang?</h1>
+            <div class="input-group">
+                <input type="text" id="username-input" placeholder="Masukkan nama..." maxlength="20">
+                <button id="join-btn"><i class="fas fa-sign-in-alt"></i></button>
+            </div>
+            <p id="login-error"></p>
+        </div>
+    </div>
+
+    <!-- Main Chat Screen (hidden initially) -->
+    <div id="chat-screen" class="hidden">
+        <!-- Header dengan User Status -->
+        <div class="chat-header">
+            <div class="header-left">
+                <h2><i class="fas fa-heart"></i>𖡼.𖤣𖥧𖡼.𖤣𖥧</h2>
+            </div>
+            <div class="header-center">
+                <!-- User status di tengah -->
+                <div id="user-status-info">
+                    <div id="other-user-info" class="hidden">
+                        <div class="user-avatar">
+                            <div class="status-indicator" id="status-dot"></div>
+                            <span id="other-username">User</span>
+                        </div>
+                        <div class="user-status-text">
+                            <span id="status-text">Online</span>
+                            <span id="last-seen" class="hidden"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <button id="clear-messages-btn" title="Hapus Semua Pesan">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages Container (tanpa sidebar) -->
+        <div id="messages-container">
+            <div id="messages"></div>
+            <div id="typing-indicator" class="hidden">
+                <span id="typing-username"></span> sedang menyampaikan perasaan...
+            </div>
+        </div>
+
+        <!-- Reply Preview Area -->
+        <div id="reply-preview" class="reply-preview hidden">
+            <div class="reply-content">
+                <div class="reply-header">
+                    <i class="fas fa-reply"></i>
+                    <span class="reply-username"></span>
+                </div>
+                <div class="reply-text"></div>
+            </div>
+            <button id="cancel-reply" class="cancel-reply-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input">
+            <div class="attachment-preview" id="attachment-preview"></div>
+            <div class="input-container">
+                <label for="file-input" class="file-label" title="Upload File">
+                    <i class="fas fa-paperclip"></i>
+                </label>
+                <input type="file" id="file-input" accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.txt" hidden>
+                <textarea id="message-input" placeholder="Sampaikan perasaan..." rows="1"></textarea>
+                <button id="send-btn" disabled title="Kirim">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu untuk Reply -->
+    <div id="context-menu" class="context-menu hidden">
+        <div class="context-menu-item" id="reply-message">
+            <i class="fas fa-reply"></i>
+            Balas Pesan
+        </div>
+    </div>
+
+    <!-- Templates -->
+    <template id="message-template">
+        <div class="message" data-message-id="">
+            <div class="message-header">
+                <span class="message-username"></span>
+                <span class="message-time"></span>
+            </div>
+            <!-- Reply Section (jika ada) -->
+            <div class="message-reply hidden">
+                <div class="reply-indicator">
+                    <i class="fas fa-reply"></i>
+                </div>
+                <div class="reply-info">
+                    <div class="reply-sender"></div>
+                    <div class="reply-preview-text"></div>
+                </div>
+            </div>
+            <div class="message-content"></div>
+            <!-- Status baca pesan -->
+            <div class="message-status">
+                <span class="read-status">
+                    <i class="fas fa-check"></i>
+                </span>
+            </div>
+        </div>
+    </template>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script1.js"></script>
+</body>
+</html>
