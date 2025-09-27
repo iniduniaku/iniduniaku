@@ -24,7 +24,7 @@
     <!-- Main Chat Screen (hidden initially) -->
     <div id="chat-screen" class="hidden">
         <!-- Header dengan User Status -->
-        <div class="chat-header">
+                <div class="chat-header">
             <div class="header-left">
                 <h2><i class="fas fa-heart"></i>𖡼.𖤣𖥧𖡼.𖤣𖥧</h2>
             </div>
@@ -58,14 +58,14 @@
             </div>
         </div>
 
-        <!-- Reply Preview Area -->
+        <!-- Reply Preview (akan muncul saat membalas pesan) -->
         <div id="reply-preview" class="reply-preview hidden">
             <div class="reply-content">
                 <div class="reply-header">
                     <i class="fas fa-reply"></i>
-                    <span class="reply-username"></span>
+                    <span>Membalas <strong id="reply-username"></strong></span>
                 </div>
-                <div class="reply-text"></div>
+                <div class="reply-text" id="reply-text"></div>
             </div>
             <button id="cancel-reply" class="cancel-reply-btn">
                 <i class="fas fa-times"></i>
@@ -88,29 +88,24 @@
         </div>
     </div>
 
-    <!-- Context Menu untuk Reply -->
-    <div id="context-menu" class="context-menu hidden">
-        <div class="context-menu-item" id="reply-message">
-            <i class="fas fa-reply"></i>
-            Balas Pesan
-        </div>
-    </div>
-
     <!-- Templates -->
     <template id="message-template">
-        <div class="message" data-message-id="">
+        <div class="message">
+            <!-- Reply preview di atas pesan (jika ada) -->
+            <div class="replied-message hidden">
+                <div class="replied-content">
+                    <div class="replied-username"></div>
+                    <div class="replied-text"></div>
+                </div>
+            </div>
+            
             <div class="message-header">
                 <span class="message-username"></span>
                 <span class="message-time"></span>
-            </div>
-            <!-- Reply Section (jika ada) -->
-            <div class="message-reply hidden">
-                <div class="reply-indicator">
-                    <i class="fas fa-reply"></i>
-                </div>
-                <div class="reply-info">
-                    <div class="reply-sender"></div>
-                    <div class="reply-preview-text"></div>
+                <div class="message-actions">
+                    <button class="reply-btn" title="Balas pesan">
+                        <i class="fas fa-reply"></i>
+                    </button>
                 </div>
             </div>
             <div class="message-content"></div>
@@ -126,4 +121,4 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
