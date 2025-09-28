@@ -1,7 +1,7 @@
 {
-  "name": "chat-app",
+  "name": "chat-app-with-reply-push",
   "version": "1.0.0",
-  "description": "Real-time chat application with file sharing",
+  "description": "Chat application with reply feature and web push notifications",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,21 +10,18 @@
   "dependencies": {
     "express": "^4.18.2",
     "socket.io": "^4.7.2",
-    "multer": "^2.0.2",
-    "uuid": "^9.0.1",
-    "axios": "^1.6.8",
-    "node-telegram-bot-api": "^0.64.0"
+    "multer": "^1.4.5-lts.1",
+    "web-push": "^3.6.6"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
   "keywords": [
     "chat",
-    "realtime",
     "socket.io",
-    "express",
-    "telegram",
-    "notifications"
+    "web-push",
+    "reply",
+    "messaging"
   ],
   "author": "Your Name",
   "license": "MIT"
